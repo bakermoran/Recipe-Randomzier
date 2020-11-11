@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Button from 'react-bootstrap/Button';
 
 
 function Home(props) {
@@ -14,7 +15,8 @@ function Home(props) {
           <li>Not offer a useless life story before you actually get to the recipe</li>
         </ol>
       </div>
-      <Link to='recipes'>Lets get started</Link>
+      <Link to='recipes'>Show me each recipe</Link> <br></br>
+      <Link to='randomizer'>Take me to the randomizer</Link>
     </div>
   );
 }

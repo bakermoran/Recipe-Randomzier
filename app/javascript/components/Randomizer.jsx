@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import Recipe from "../components/Recipe"
+import Recipe from "./Recipe"
 import { Link } from "react-router-dom";
 
 class Recipes extends React.Component {
@@ -30,7 +30,8 @@ class Recipes extends React.Component {
     return(
       <div>
         {this.state.recipes.map(recipe => (
-          <div key={recipe.id}>
+          <div key={recipe.id}
+          >
             <Recipe
               recipe_details={recipe}
             />

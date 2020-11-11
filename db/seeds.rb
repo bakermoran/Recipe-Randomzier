@@ -9,6 +9,7 @@
 20.times do |i|
     Recipe.create(
         name: "Recipe #{i + 1}",
+        description: "this is a delicious and easy recipe for an home cook",
         ingredients: {:oil => "two tbsp",
                       :chicken => "two breasts",
                       :spices => "to taste"
