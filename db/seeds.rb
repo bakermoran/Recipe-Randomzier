@@ -6,10 +6,11 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-20.times do |i|
+40.times do |i|
     Recipe.create(
         name: "Recipe #{i + 1}",
-        description: "this is a delicious and easy recipe for an home cook",
+        description: "this is a delicious and easy recipe for any home cook",
+        servings: 2,
         ingredients: {:oil => "two tbsp",
                       :chicken => "two breasts",
                       :spices => "to taste"

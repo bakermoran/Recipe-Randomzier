@@ -8,6 +8,14 @@ class Api::V1::RecipesController < ApplicationController
         }
     end
 
+    def randomizer
+        params[:num_recipes] ||= 5
+        @recipes = Recipe.order("RANDOM()").limit(params[:num_recipes])
+        render json: {
+            recipes: @recipes
+        }
+    end
+
     def show
         @recipe = Recipe.find(params[:id])
         if @recipe

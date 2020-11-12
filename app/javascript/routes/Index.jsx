@@ -4,6 +4,7 @@ import Home from "../components/Home";
 import ShowRecipe from "../components/ShowRecipe";
 import Randomizer from "../components/Randomizer";
 import ShowAllRecipes from "../components/ShowAllRecipes";
+import ShoppingList from "../components/ShoppingList";
 
 const base_url = "/api/v1/"
 
@@ -20,6 +21,11 @@ export default (
         exact
         path="/randomizer/"
         component={() => <Randomizer url={base_url} />}
+      />
+      <Route
+        exact
+        path="/shopping_list/"
+        component={() => <ShoppingList url={base_url} />}
       />
       <Route
         exact

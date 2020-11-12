@@ -1,4 +1,5 @@
 import React from 'react';
+import Moment from 'react-moment';
 
 class Recipe extends React.Component {
   constructor(props) {
@@ -9,7 +10,9 @@ class Recipe extends React.Component {
   render() {
     return (
       <div>
-        <p>{this.props.recipe_details.name}</p>
+        <h2>{this.props.recipe_details.name}</h2>
+        <p><small>Added <Moment fromNow date={this.props.recipe_details.created_at} /></small></p>
+        <p>{this.props.recipe_details.description}</p>
       </div>
     );
   } // render
