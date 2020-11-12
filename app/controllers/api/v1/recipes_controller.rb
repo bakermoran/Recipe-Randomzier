@@ -1,7 +1,11 @@
 class Api::V1::RecipesController < ApplicationController
     def index
-        recipes = Recipe.all
-        render json: recipes
+        @recipes = Recipe.all.paginate(page: params[:page], per_page: 10)
+        render json: {
+            recipes: @recipes,
+            page: @recipes.current_page,
+            pages: @recipes.total_pages
+        }
     end
 
     def show

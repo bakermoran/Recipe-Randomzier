@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from 'prop-types';
 import Recipe from "./Recipe"
 import { Link } from "react-router-dom";
-import { Jumbotron } from "react-bootstrap";
+import { Jumbotron, Pagination } from "react-bootstrap";
 
 class Recipes extends React.Component {
   constructor(props) {
@@ -21,15 +21,27 @@ class Recipes extends React.Component {
     })
     .then((data) => {
       this.setState({
-        recipes: data,
+        recipes: data.recipes,
+        current_page: data.page,
+        total_pages: data.pages
       });
     })
     .catch(error => console.log(error));// eslint-disable-line no-console
   }
 
   render() {
+    let active = this.state.current_page;
+    let items = [];
+    for (let number = 1; number <= this.state.total_pages; number++) {
+      items.push(
+        <Pagination.Item key={number} active={number === active}>
+          {number}
+        </Pagination.Item>,
+      );
+    }
     return(
       <div>
+        <Pagination>{items}</Pagination>
         {this.state.recipes.map(recipe => (
           <Jumbotron key={recipe.id}
           >
