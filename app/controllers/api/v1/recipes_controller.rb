@@ -1,4 +1,6 @@
 class Api::V1::RecipesController < ApplicationController
+    skip_before_action :verify_authenticity_token
+
     def index
         @recipes = Recipe.all.paginate(page: params[:page], per_page: 10)
         render json: {
@@ -14,6 +16,18 @@ class Api::V1::RecipesController < ApplicationController
         render json: {
             recipes: @recipes
         }
+    end
+
+    def scrape_babish
+        url = 'https://basicswithbabish.co/episodes'
+        @response = BabishSpider.process(url)
+        if @response[:status] == :completed && @response[:error].nil?
+          flash.now[:notice] = "Successfully scraped basics with babish"
+        else
+          flash.now[:alert] = @response[:error]
+        end
+        rescue StandardError => e
+        flash.now[:alert] = "Error: #{e}"
     end
 
     def show

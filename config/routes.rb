@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
-      resources :recipes
+      resources :recipes do
+        match '/scrape_babish', to: 'recipes#scrape_babish', via: :post, on: :collection
+      end
       get '/randomizer' => 'recipes#randomizer'
     end
   end
