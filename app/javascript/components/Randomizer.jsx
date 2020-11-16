@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import RandomRecipes from "./RandomRecipes"
-import { Jumbotron, Form, Button, Link } from "react-bootstrap";
+import { Jumbotron, Form, Button } from "react-bootstrap";
 import { PlusCircle } from 'react-bootstrap-icons';
 
 class Randomizer extends React.Component {

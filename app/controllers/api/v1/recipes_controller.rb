@@ -40,8 +40,8 @@ class Api::V1::RecipesController < ApplicationController
     end
 
     def create
-        @recipe = Recipe.create!(recipe_params)
-        if @recipe
+        @recipe = Recipe.new(recipe_params)
+        if @recipe.save
             render json: @recipe
         else
             render json: @recipe.errors
@@ -56,6 +56,18 @@ class Api::V1::RecipesController < ApplicationController
     private
 
     def recipe_params
-        params.permit(:name, :image_url, :ingredients, :instructions)
+        params.require(:recipe).permit(
+            :name,
+            :description,
+            :servings,
+            {
+                ingredients: [
+                    :name,
+                    :amount,
+                    :measure
+                ]
+            },
+            :instructions => []
+        )
     end
 end

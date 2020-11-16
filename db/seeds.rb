@@ -11,14 +11,27 @@
         name: "Recipe #{i + 1}",
         description: "this is a delicious and easy recipe for any home cook",
         servings: 2,
-        ingredients: {:oil => "two tbsp",
-                      :chicken => "two breasts",
-                      :spices => "to taste"
-                     },
+        ingredients: [
+            {
+                :name => "oil",
+                :amount => 2,
+                :measure => "tbsp"
+            },
+            {
+                :name => "chicken",
+                :amount => 2,
+                :measure => "lbs"
+            },
+            {
+                :name => "salt and pepper",
+                :amount => 1,
+                :measure => "tsp"
+            }
+        ],
         instructions: ["put the oil in the pan",
-                       "heat the pan until smoking",
-                       "place the chicken breast in and season it",
-                       "cook to an internal temperature of 165, flipping half way through"
-                      ]
+            "heat the pan until smoking",
+            "place the chicken breast in and season it",
+            "cook to an internal temperature of 165, flipping half way through"
+        ]
     )
 end

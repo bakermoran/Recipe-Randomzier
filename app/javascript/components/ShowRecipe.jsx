@@ -39,16 +39,20 @@ class ShowRecipe extends React.Component {
                     <img src={this.state.recipe_details.img_url} />
                     <h2>Ingredients Needed</h2>
                     <ul>
-                        {ingredients}
+                        {this.state.recipe_details.ingredients.map(ingredient => (
+                            <li key={ingredient.name}>
+                                {ingredient.amount} {ingredient.measure} {ingredient.name}
+                            </li>
+                        ))}
                     </ul>
                     <h2>Instructions</h2>
-                    <ul>
+                    <ol>
                         {this.state.recipe_details.instructions.map(instruction => (
                             <li key={instruction}>
                                 {instruction}
                             </li>
                         ))}
-                    </ul>
+                    </ol>
                 </div>
             );
         }

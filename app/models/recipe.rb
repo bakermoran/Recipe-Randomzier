@@ -1,5 +1,5 @@
 class Recipe < ApplicationRecord
-    serialize :ingredients, Hash
+    serialize :ingredients, Array
     serialize :instructions, Array
     validates :name, presence: true
     validates :ingredients, presence: true

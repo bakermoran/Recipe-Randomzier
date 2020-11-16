@@ -9,8 +9,9 @@ function Header(props) {
       <Navbar.Brand href="/">Recipe Randomizer</Navbar.Brand>
       <Nav className="mr-auto">
         <Nav.Link href="/">Home</Nav.Link>
-        <Nav.Link href="/recipes">Recipes</Nav.Link>
         <Nav.Link href="/randomizer">Randomizer</Nav.Link>
+        <Nav.Link href="/recipes">Recipes</Nav.Link>
+        <Nav.Link href="/add_recipe">Add a recipe</Nav.Link>
       </Nav>
     </Navbar>
   );

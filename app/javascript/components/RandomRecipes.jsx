@@ -1,6 +1,7 @@
 import React from 'react';
 import Moment from 'react-moment';
 import { XCircle } from 'react-bootstrap-icons';
+import { Link } from "react-router-dom";
 import { Jumbotron, Button } from "react-bootstrap";
 
 class RandomRecipes extends React.Component {
@@ -25,7 +26,7 @@ class RandomRecipes extends React.Component {
             <h2>{recipe.name}</h2>
             <p><small>Added <Moment fromNow date={recipe.created_at} /></small></p>
             <p>{recipe.description}</p>
-            {/* <Link to={'/recipes/' + recipe.id}>Show me more</Link> */}
+            <Link to={'/recipes/' + recipe.id}>Show me more</Link>
           </Jumbotron>
         ))}
       </div>
