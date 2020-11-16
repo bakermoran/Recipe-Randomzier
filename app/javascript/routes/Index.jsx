@@ -1,11 +1,11 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Home from "../components/Home";
-import ShowRecipe from "../components/ShowRecipe";
-import Randomizer from "../components/Randomizer";
-import ShowAllRecipes from "../components/ShowAllRecipes";
-import ShoppingList from "../components/ShoppingList";
-import AddRecipe from "../components/AddRecipe";
+import ShowRecipe from "../components/show_recipes/ShowRecipe";
+import ShowAllRecipes from "../components/show_recipes/ShowAllRecipes";
+import Home from "../components/app/Home";
+import Randomizer from "../components/randomizer/Randomizer";
+import ShoppingList from "../components/randomizer/ShoppingList";
+import AddRecipe from "../components/add_a_recipe/AddRecipe";
 
 const base_url = "/api/v1/"
 
@@ -26,7 +26,7 @@ export default (
       <Route
         exact
         path="/shopping_list/"
-        component={() => <ShoppingList url={base_url} />}
+        component={(props) => <ShoppingList {...props} url={base_url} />}
       />
       <Route
         exact

@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from 'prop-types';
 import { Jumbotron, Form, Button, Row, Col } from "react-bootstrap";
 import { PlusCircle, XCircle } from 'react-bootstrap-icons';
-import ThanksForYourRecipe from "../components/ThanksForYourRecipe";
+import ThanksForYourRecipe from "./ThanksForYourRecipe";
 
 class AddRecipe extends React.Component {
     constructor(props) {

@@ -1,7 +1,9 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import RandomRecipes from "./RandomRecipes"
+import ShowRecipe from "./ShowRecipe"
 import { Jumbotron, Form, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import { PlusCircle } from 'react-bootstrap-icons';
 
 class Randomizer extends React.Component {
@@ -10,7 +12,9 @@ class Randomizer extends React.Component {
     this.state = {
       num_recipes: 5,
       recipes: [],
-      recipe_ids: []
+      recipe_ids: [],
+      api_return: false,
+      show_recipe_details: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
@@ -33,12 +37,13 @@ class Randomizer extends React.Component {
     })
     .then((data) => {
       let recipe_ids = []
-      for (let i = 0; i < this.state.recipes.length; i++) {
-        recipe_ids.push(this.state.recipes[i].id);
+      for (let i = 0; i < data.recipes.length; i++) {
+        recipe_ids.push(data.recipes[i].id);
       }
       this.setState({
         recipes: data.recipes,
-        recipe_ids: recipe_ids
+        recipe_ids: recipe_ids,
+        api_return: true
       });
     })
     .catch(error => console.log(error));// eslint-disable-line no-console
@@ -53,7 +58,7 @@ class Randomizer extends React.Component {
     })
     .then((data) => {
       if (this.state.recipe_ids.includes(data.recipes[0].id)) {
-        addNewRecipe() // to do: this doesnt really work
+        return // to do: this is kind of an annoying way to do that
       }
       this.setState({
         recipes: [...this.state.recipes, data.recipes[0]],
@@ -78,32 +83,46 @@ class Randomizer extends React.Component {
       recipe_ids: new_ids,
       num_recipes: this.state.num_recipes - 1
     })
-  }
+  } //deleteRecipe(id)
 
   render() {
-    return(
-      <div>
-        <Jumbotron>
-          <Form>
-            <Form.Group>
-              <Form.Label>How many meals do you need this week?</Form.Label>
-              <Form.Control type="text" name="num_recipes" value={this.state.num_recipes} onChange={this.handleChange} placeholder="5" />
-            </Form.Group>
-            <Button variant="outline-primary"
-                    onClick={this.handleClick}>
-              Refresh Recipes
-            </Button>
-          </Form>
-        </Jumbotron>
-        {this.state.recipes ? <RandomRecipes deleteRecipe={this.deleteRecipe}
-                                             recipes={this.state.recipes}/>
-                                             : ''}
-        <Button variant="outline-success"
-                onClick={this.addNewRecipe}>
-          <PlusCircle />
-        </Button>
-      </div>
-    );
+    if(!this.state.show_recipe_details) {
+      return(
+        <div>
+          <Jumbotron>
+            <Form>
+              <Form.Group>
+                <Form.Label>How many meals do you need this week?</Form.Label>
+                <Form.Control type="text" name="num_recipes" value={this.state.num_recipes} onChange={this.handleChange} placeholder="5" />
+              </Form.Group>
+              {this.state.api_return ?
+              <div>
+                <Button variant="outline-primary" onClick={this.handleClick}>Refresh all recipes</Button>
+                <Link to={{
+                  pathname: '/shopping_list/',
+                  state: {
+                    recipe_ids: this.state.recipe_ids
+                  }
+                }}>Continue to shopping list</Link>
+              </div>
+              :
+              <Button variant="outline-primary" onClick={this.handleClick}>Show me some recipes</Button>
+              }
+            </Form>
+          </Jumbotron>
+          {this.state.recipes ? <RandomRecipes deleteRecipe={this.deleteRecipe}
+                                              recipes={this.state.recipes}/>
+                                              : ''}
+          <Button variant="outline-success"
+                  onClick={this.addNewRecipe}>
+            <PlusCircle />
+          </Button>
+        </div>
+      );
+    }
+    else {
+      // <ShowRecipe url={this.props.url}/>
+    }
   } // render ()
 }
 
